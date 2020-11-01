@@ -47,3 +47,4 @@ void read_data(string fn, int students, int exams)
 int main()
 {
     read_data("../datasets/car-f-92.stu", 18419, 543);
+}
