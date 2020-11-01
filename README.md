@@ -9,3 +9,10 @@
 * Χρωματισμός γράφου [wikipedia](https://en.wikipedia.org/wiki/Graph_coloring).
 * [Graph Coloring Greedy Algorithm [O(V^2 + E) time complexity]](https://iq.opengenus.org/graph-colouring-greedy-algorithm/)
 * [Benchmark Data Sets in Exam Timetabling](http://www.asap.cs.nott.ac.uk/external/resources/)
+
+## Αποσπάσαμτα κώδικα: 
+
+* [read_data.cpp](/app/src/read_data.cpp): ανάγνωση δεδομένων [car-s-92.stu](./app/datasets/car-f-92.stu), καταγραφή φοιτητών ανά εξέταση.
+* [set_ops.cpp](/app/src/set_ops.cpp): εύρεση τομής ενός std::set<int> με ένα άλλο std::set<int>.
+* [random_numbers.cpp](./app/src/random_numbers.cpp), [random_numbers2.cpp](./app/src/random_numbers2.cpp): παραγωγή ψεύδο-τυχαίων ακέραιων τιμών στο διάστημα [1,V].
+* [greedy_coloring.cpp](./app/src/greedy_coloring.cpp): απεικόνιση γράφου ως λίστα γειτνίασης και greedy χρωματισμός του γράφου.
