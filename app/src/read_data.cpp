@@ -42,6 +42,25 @@ void read_data(string fn, int students, int exams)
         }
         cout << endl;
     }
+
+    cout << "#################################" << endl;
+
+    int AdjMatrix[exams][exams] ;
+    for (int i =1; i<exams; i++){
+       int count = 0; 
+        for (int j=1; j<exams; j++){
+            if ( exam_students[i]==exam_students[j]) {count++;}
+            AdjMatrix[i][j] = count;
+        }
+    }
+
+    for (int i =1; i<exams; i++){
+        cout << i<<": ";
+        for (int j=1; j<exams; j++){
+            cout << AdjMatrix[i][j];
+        } 
+        cout << endl;
+    }
 }
 
 int main()
