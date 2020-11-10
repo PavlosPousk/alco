@@ -110,5 +110,4 @@ int main()
 {
     //read_data("../datasets/car-f-92.stu", 18419, 543);
     read_data("../datasets/toy-e5-s6.stu", 6, 5);
-    
 }
