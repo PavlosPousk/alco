@@ -160,8 +160,6 @@ void read_data(string fn, int students, int exams)
 
     delete[] adj_matrix;
 
-
-
 }
 
 int main()
