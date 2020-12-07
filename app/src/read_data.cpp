@@ -4,7 +4,6 @@
 #include <vector>
 #include <set>
 #include <bits/stdc++.h>
-
 using namespace std;
 
 int count_common_elements(set<int> s1, set<int> s2)
@@ -28,6 +27,7 @@ void read_data(string fn, int students, int exams)
 {
     vector<int> sequenceDegree;
     vector<set<int>> exam_students(exams + 1);
+    list<int> *vert=new list<int>[exams];
     fstream fs(fn);
     if (!fs.is_open())
     {
@@ -72,6 +72,7 @@ void read_data(string fn, int students, int exams)
             AdjMatrix[i][j] = count;
         }
     }
+
     int s=0;
     cout << "Adjacency Matrix" << endl;
     int *adj_matrix = new int[exams * exams];
@@ -87,7 +88,7 @@ void read_data(string fn, int students, int exams)
             if (c > 0){ s=s+1;
                 cout << s << ": " << i + 1 << " " << j + 1 << " " << c << endl;}   
             adj_matrix[i * exams + j] = c;
-        }
+            }
     } 
 
     int c=0;
@@ -103,7 +104,7 @@ void read_data(string fn, int students, int exams)
     }
 
     double cd = double(c) / double(exams * exams);
-
+    
     cout << "#################################" << endl;
     cout << "Conflict Density: " << cd << endl;
 
@@ -119,12 +120,15 @@ void read_data(string fn, int students, int exams)
                 c++;
             }
         }
+        vert[i].push_back(c);
+        vert[c].push_back(i);   
+
         sequenceDegree.push_back(c);
         if (c>max) max=c;
         if (c<min) min=c;
 
     }
-
+    
     sort(sequenceDegree.begin(), sequenceDegree.end());
     int indexMed;
     if (sequenceDegree.size() % 2 == 0) {
@@ -158,8 +162,45 @@ void read_data(string fn, int students, int exams)
     cout << "Mean: " << mean << endl;  
     cout << "CV: " << CV << " %"<< endl;
 
-    delete[] adj_matrix;
+    int V=exams;
+    int coloringVertices[V];
 
+    coloringVertices[0] = 0;
+
+    for (int i = 1; i < V; i++)
+        coloringVertices[i] = -1; 
+
+    bool availableColors[V];
+    for (int cl = 0; cl < V; cl++)
+        availableColors[cl] = false;
+
+    for (int i = 1; i < V; i++)
+    {
+        list<int>::iterator j;
+        for (j=vert[i].begin(); j != vert[i].end(); j++)
+            if (coloringVertices[*j] != -1)
+                availableColors[coloringVertices[*j]] = true;
+   
+        int clr;
+        for (clr = 0; clr < V; clr++)
+            if (availableColors[clr])
+                break;
+
+        coloringVertices[i] = clr; 
+
+        for (j=vert[i].begin(); j != vert[i].end(); j++)
+            if (coloringVertices[*j] != -1)
+                availableColors[coloringVertices[*j]] = false;
+    }
+    
+    cout << "#################################" << endl;
+    cout << "Coloring graph \n";      
+    for (int i = 0; i < V; i++){
+                cout << "Vertex " << i << " --->  Color "<< coloringVertices[i] <<endl;
+    }
+   
+    delete[] adj_matrix;
+    delete[] vert;
 }
 
 int main()
@@ -169,15 +210,16 @@ int main()
     //read_data("../datasets/car-f-92.stu", 18419, 543);
     //read_data("../datasets/car-s-91.stu", 16925, 682);
     //read_data("../datasets/ear-f-83.stu", 1125, 190);
-    //read_data("../datasets/hec-s-92.stu", 2823, 81);
+    read_data("../datasets/hec-s-92.stu", 2823, 81);
     //read_data("../datasets/kfu-s-93.stu", 5349, 461);
     //read_data("../datasets/lse-f-91.stu", 2726, 381);
     //read_data("../datasets/pur-s-93.stu", 30029, 2419);
     //read_data("../datasets/rye-s-93.stu", 11483, 486);
-    read_data("../datasets/sta-f-83.stu", 611, 139);
+    //read_data("../datasets/sta-f-83.stu", 611, 139);
     //read_data("../datasets/tre-s-92.stu", 4360, 261);
     //read_data("../datasets/uta-s-92.stu", 21266, 622);
     //read_data("../datasets/ute-s-92.stu", 2749, 184);
     //read_data("../datasets/yor-f-83.stu", 941, 181);
-    
+
+    return 0;
 }
