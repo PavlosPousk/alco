@@ -162,6 +162,7 @@ void read_data(string fn, int students, int exams)
     cout << "Mean: " << mean << endl;  
     cout << "CV: " << CV << " %"<< endl;
 
+    //Greedy Algorithm
     int V=exams;
     int coloringVertices[V];
 
