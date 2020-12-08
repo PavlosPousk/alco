@@ -89,7 +89,8 @@ void read_data(string fn, int students, int exams)
             if (c > 0) 
                 cout << i + 1 << " " << j + 1 << " " << c << endl;   
             adj_matrix[i * exams + j] = c;
-            }
+            g1.addEdge(i,c); //for greedy
+        }        
     } 
 
     int c=0;
@@ -121,9 +122,7 @@ void read_data(string fn, int students, int exams)
             {
                 c++;
             }
-        }
-        g1.addEdge(i,c); //for greedy
-        
+        }  
         sequenceDegree.push_back(c);
         if (c>max) max=c;
         if (c<min) min=c;
