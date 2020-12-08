@@ -26,7 +26,7 @@ void Graph::addEdge(int v, int w)
 } 
 
 void Graph::greedyColoring() {
-    
+
     int coloringVertices[V];
 
     coloringVertices[0] = 0;
