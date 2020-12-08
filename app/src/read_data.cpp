@@ -4,6 +4,7 @@
 #include <vector>
 #include <set>
 #include <bits/stdc++.h>
+#include "greedyAlgorithm.cpp"
 using namespace std;
 
 int count_common_elements(set<int> s1, set<int> s2)
@@ -27,7 +28,6 @@ void read_data(string fn, int students, int exams)
 {
     vector<int> sequenceDegree;
     vector<set<int>> exam_students(exams + 1);
-    list<int> *vert=new list<int>[exams];
     fstream fs(fn);
     if (!fs.is_open())
     {
@@ -90,6 +90,9 @@ void read_data(string fn, int students, int exams)
             }
     } 
 
+    int V=exams;
+    Graph g1(V,adj_matrix);
+
     int c=0;
     for (int i = 0; i < exams; i++)
     {
@@ -120,16 +123,15 @@ void read_data(string fn, int students, int exams)
                 c++;
             }
         }
-        vert[i].push_back(c); //for greedy
-        vert[c].push_back(i); //for greedy  
-
+        g1.addEdge(i, c); //for greedy
+        
         sequenceDegree.push_back(c);
         if (c>max) max=c;
         if (c<min) min=c;
 
     }
     
-    //calculate mean
+    //calculate med mean
     sort(sequenceDegree.begin(), sequenceDegree.end());
     int indexMed;
     if (sequenceDegree.size() % 2 == 0) {
@@ -164,57 +166,19 @@ void read_data(string fn, int students, int exams)
     cout << "Max: " << max << endl; 
     cout << "Mean: " << mean << endl;  
     cout << "CV: " << CV << " %"<< endl;
-
-    //Greedy Algorithm
-    int V=exams;
-    int coloringVertices[V];
-
-    coloringVertices[0] = 0;
-
-    for (int i = 1; i < V; i++)
-        coloringVertices[i] = -1; 
-
-    bool availableColors[V];
-    for (int cl = 0; cl < V; cl++)
-        availableColors[cl] = false;
-
-    for (int i = 1; i < V; i++)
-    {
-        list<int>::iterator j;
-        for (j=vert[i].begin(); j != vert[i].end(); j++)
-            if (coloringVertices[*j] != -1)
-                availableColors[coloringVertices[*j]] = true;
-   
-        int clr;
-        for (clr = 0; clr < V; clr++)
-            if (availableColors[clr])
-                break;
-
-        coloringVertices[i] = clr; 
-
-        for (j=vert[i].begin(); j != vert[i].end(); j++)
-            if (coloringVertices[*j] != -1)
-                availableColors[coloringVertices[*j]] = false;
-    }
-    
-    cout << "#################################" << endl;
-    cout << "Coloring graph \n";      
-    for (int i = 0; i < V; i++){
-                cout << "Vertex " << i << " --->  Color "<< coloringVertices[i] <<endl;
-    }
+    g1.greedyColoring();
    
     delete[] adj_matrix;
-    delete[] vert;
 }
 
 int main()
 {
-    //read_data("../datasets/toy-e5-s6.stu", 6, 5);
+    read_data("../datasets/toy-e5-s6.stu", 6, 5);
     
     //read_data("../datasets/car-f-92.stu", 18419, 543);
     //read_data("../datasets/car-s-91.stu", 16925, 682);
     //read_data("../datasets/ear-f-83.stu", 1125, 190);
-    read_data("../datasets/hec-s-92.stu", 2823, 81);
+    //read_data("../datasets/hec-s-92.stu", 2823, 81);
     //read_data("../datasets/kfu-s-93.stu", 5349, 461);
     //read_data("../datasets/lse-f-91.stu", 2726, 381);
     //read_data("../datasets/pur-s-93.stu", 30029, 2419);
