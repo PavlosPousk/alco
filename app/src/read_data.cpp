@@ -91,7 +91,7 @@ void read_data(string fn, int students, int exams)
     } 
 
     int V=exams;
-    Graph g1(V,adj_matrix);
+    Graph g1(V);
 
     int c=0;
     for (int i = 0; i < exams; i++)
@@ -123,7 +123,7 @@ void read_data(string fn, int students, int exams)
                 c++;
             }
         }
-        g1.addEdge(i, c); //for greedy
+        g1.addEdge(i,c); //for greedy
         
         sequenceDegree.push_back(c);
         if (c>max) max=c;
