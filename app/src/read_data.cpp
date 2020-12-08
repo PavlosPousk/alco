@@ -73,7 +73,6 @@ void read_data(string fn, int students, int exams)
         }
     }
 
-    int s=0;
     cout << "Adjacency Matrix" << endl;
     int *adj_matrix = new int[exams * exams];
     for (int i = 0; i < exams; i++)
