@@ -28,6 +28,8 @@ void read_data(string fn, int students, int exams)
 {
     vector<int> sequenceDegree;
     vector<set<int>> exam_students(exams + 1);
+    int V=exams;
+    Graph g1(V);
     fstream fs(fn);
     if (!fs.is_open())
     {
@@ -89,9 +91,6 @@ void read_data(string fn, int students, int exams)
             adj_matrix[i * exams + j] = c;
             }
     } 
-
-    int V=exams;
-    Graph g1(V);
 
     int c=0;
     for (int i = 0; i < exams; i++)
