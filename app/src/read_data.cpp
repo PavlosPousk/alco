@@ -85,8 +85,8 @@ void read_data(string fn, int students, int exams)
                 continue;
             }
             int c = count_common_elements(exam_students[i + 1], exam_students[j + 1]);
-            if (c > 0){ s=s+1;
-                cout << s << ": " << i + 1 << " " << j + 1 << " " << c << endl;}   
+            if (c > 0) 
+                cout << i + 1 << " " << j + 1 << " " << c << endl;   
             adj_matrix[i * exams + j] = c;
             }
     } 
