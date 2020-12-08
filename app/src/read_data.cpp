@@ -107,6 +107,7 @@ void read_data(string fn, int students, int exams)
     cout << "#################################" << endl;
     cout << "Conflict Density: " << cd << endl;
 
+    //calculate min max
     int min=1000000;
     int max=0;
     for (int i = 0; i < exams; i++)
@@ -119,8 +120,8 @@ void read_data(string fn, int students, int exams)
                 c++;
             }
         }
-        vert[i].push_back(c);
-        vert[c].push_back(i);   
+        vert[i].push_back(c); //for greedy
+        vert[c].push_back(i); //for greedy  
 
         sequenceDegree.push_back(c);
         if (c>max) max=c;
@@ -128,6 +129,7 @@ void read_data(string fn, int students, int exams)
 
     }
     
+    //calculate mean
     sort(sequenceDegree.begin(), sequenceDegree.end());
     int indexMed;
     if (sequenceDegree.size() % 2 == 0) {
@@ -144,6 +146,7 @@ void read_data(string fn, int students, int exams)
     }
     double mean = double(sum1) / double(sequenceDegree.size());
 
+    //calculate CV
     double sum2 = 0.0;
     double a, b;
     for (int i = 0; i < int(sequenceDegree.size()); i++) {
@@ -155,6 +158,7 @@ void read_data(string fn, int students, int exams)
     double S = sqrt(S2);
     double CV = (S / mean) * 100;
 
+    //Print Statistics
     cout << "Min: " << min << endl;
     cout << "Med: " << med << endl;
     cout << "Max: " << max << endl; 
