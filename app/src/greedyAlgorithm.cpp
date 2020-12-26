@@ -8,7 +8,7 @@ class Graph
 	list<int> *vert; // A dynamic array of adjacency lists
 public: 
 	// Constructor and destructor 
-	Graph(int V) { this->V = V; vert = new list<int>[V];} 
+	Graph(int V) { this->V = V; vert = new list<int>[V*V];} 
 	~Graph()	 { delete [] vert; } 
 
 	// function to add an edge to graph 

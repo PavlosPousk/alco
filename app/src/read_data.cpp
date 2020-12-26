@@ -89,8 +89,19 @@ void read_data(string fn, int students, int exams)
             if (c > 0) 
                 cout << i + 1 << " " << j + 1 << " " << c << endl;   
             adj_matrix[i * exams + j] = c;
+            //g1.addEdge(i,c); //for greedy 
         }        
     } 
+
+    int w=0;
+    for (int i = 0; i < exams; i++)
+    {
+        for (int j = 0; j < exams; j++)
+        {
+            w=adj_matrix[i * exams + j];
+            g1.addEdge(i,w); //for greedy 
+        }
+    }
 
     int c=0;
     for (int i = 0; i < exams; i++)
@@ -122,7 +133,7 @@ void read_data(string fn, int students, int exams)
                 c++;
             }
         } 
-        g1.addEdge(i,c); //for greedy 
+        
         sequenceDegree.push_back(c);
         if (c>max) max=c;
         if (c<min) min=c;
@@ -171,14 +182,14 @@ void read_data(string fn, int students, int exams)
 
 int main()
 {
-    //read_data("../datasets/toy-e5-s6.stu", 6, 5);
+    read_data("../datasets/toy-e5-s6.stu", 6, 5);
     
     //read_data("../datasets/car-f-92.stu", 18419, 543);
     //read_data("../datasets/car-s-91.stu", 16925, 682);
     //read_data("../datasets/ear-f-83.stu", 1125, 190);
     //read_data("../datasets/hec-s-92.stu", 2823, 81);
     //read_data("../datasets/kfu-s-93.stu", 5349, 461);
-    read_data("../datasets/lse-f-91.stu", 2726, 381);
+    //read_data("../datasets/lse-f-91.stu", 2726, 381);
     //read_data("../datasets/pur-s-93.stu", 30029, 2419);
     //read_data("../datasets/rye-s-93.stu", 11483, 486);
     //read_data("../datasets/sta-f-83.stu", 611, 139);
